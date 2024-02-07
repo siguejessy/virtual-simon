@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background-color: black;
+  color: azure;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+h1 {
+  position: absolute;
+}
+
+.board-container {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 60vw;
+  height: 60vh;
+  max-width: 425px;
+  max height: 425px;
+  min-width: 250px;
+  background-color: rgb(15, 15, 15);
+  border: solid 25px rgb(31, 31, 31);
+    box-shadow: 1px 20px 500px -30px #999;
+  border-radius: 50%;
+  margin-top: 60px;
+}
+
+.light-buttons {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
+  gap: 13px;
+}
+
+#tl,
+#tr,
+#bl,
+#br {
+  border: solid 3px rgb(88, 88, 88);
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#tl,
+#bl {
+  grid-column: 1;
+}
+
+#tr,
+#br {
+  grid-column: 2;
+}
+
+#tl {
+  grid-row: 1;
+  background-color: hsl(100, 70%, 40%);
+  border-radius: 100% 5% 0% 5%;
+}
+#bl {
+  grid-row: 2 / 3;
+  background-color: hsl(50, 70%, 40%);
+  border-radius: 5% 0% 5% 100%;
+}
+#tr {
+  grid-row: 1;
+  background-color: hsl(0, 70%, 40%);
+  border-radius: 5% 100% 5% 0%;
+}
+#br {
+  grid-row: 2 / 3;
+  background-color: hsl(230, 70%, 40%);
+  border-radius: 0% 5% 100% 5%;
+}
+
+.center-console {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  height: 50%;
+  width: 50%;
+  background-color: rgb(65, 65, 65);
+  border-radius: 50%;
+  border: solid 3px rgb(88, 88, 88);
+  align-items: center;
+}
+
+#tl:active {
+  background: radial-gradient(hsl(100deg, 90%, 75%), hsl(100deg, 70%, 40%));
+}
+
+#bl:active {
+  background: radial-gradient(hsl(50deg, 90%, 75%), hsl(50deg, 70%, 40%));
+}
+
+#tr:active {
+  background: radial-gradient(hsl(0deg, 90%, 75%), hsl(0deg, 70%, 40%));
+}
+
+#br:active {
+  background: radial-gradient(hsl(230deg, 90%, 75%), hsl(230deg, 70%, 40%));
+}
+
+.start {
+  display: flex;
+  padding: 15px 25px;
+  font-size: 25px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #8f8f8f;
+  background-color: #2d2d2d;
+  border: none;
+  border-radius: 0% 0% 50% 50%;
+  box-shadow: 0 3px #999;
+  margin-top: 1em;
+}
+
+.start:hover {
+  background-color: #3e8e41;
+}
+
+.start:active {
+  background-color: #3e8e41;
+  box-shadow: 0 6px #666;
+  transform: translateY(4px);
+}
+
+#counter {
+    position: relative;
+    margin-top: 2em;
+    background-color: #999;
+    height: 2em;
+}
