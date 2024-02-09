@@ -1,84 +1,114 @@
-// /*----- variables used to track the state of the game  -----*/
-// let board;
-// let turn;
-// let round;
-let colorBtns = []; 
+let gameOn = false;
+let turn = null;
+let roundCount = null;
+let simonSequence = [];
+let playerSequence = [];
 
-// /*----- constants in the game  -----*/
-// const player1;
-// const simon;
-// const startBtn;
+const colorBtns = document.querySelectorAll(".light-buttons > div");
+const startBtn = document.querySelector(".start");
+const counterEl = document.querySelector("h2");
+const messageEl = document.querySelector("#display");
 
-/*----- cached elements  -----*/
-//Store elements on the page that will be accessed in code more than once in variables 
-//to make code more concise, readable and performant.
+startBtn.addEventListener("click", startGame);
+function startGame() {
+  gameOn = true;
+  turn = "simon";
+  simonSequence = [];
+  playerSequence = [];
+  simonTurn();
+}
 
-const colorBtnsEl = [...document.querySelectorAll('.light-buttons > div')];
-        console.log(colorBtnsEl);
+function startGame() {
+  gameOn = true;
+  roundCount = 1;
+  counterEl.textContent = roundCount;
+  simonSequence = [];
+  playerSequence = [];
+  simonTurn();
+}
 
-        const s
+function simonTurn() {
+  turn = "simon";
+  removePlayerListeners();
+  simonSequence = updateSimonSequence(roundCount);
+  showSimonSequence();
+}
 
+function updateSimonSequence() {
+  simonSequence.push(
+    colorBtns[Math.floor(Math.random() * colorBtns.length)].id
+  );
+  return simonSequence;
+}
 
-//startBtnEl (not sure if this should be it's own element or include in buttonEl)
-// countEl
+function showSimonSequence() {
+  simonSequence.forEach((color, index) => {
+    setTimeout(() => {
+      const colorButton = Array.from(colorBtns).find(
+        (button) => button.id === color
+      );
+      colorButton.classList.add("active");
+      setTimeout(() => {
+        colorButton.classList.remove("active");
+      }, 750);
+    }, index * 1000);
+  });
+  setPlayerTurn();
+}
 
-// // /*----- event listeners -----*/
-// // startBtnEl.addEventListener('click', function Initialize(){
-// //     //function to render a new board and restart the combination count
-// // });
-// // buttonsEl.addEventListener('click',function(litButton){
-// //     //function will render the button to it's non-default color &
-// //     //play the button's audio when clicked
-// // });
+function setPlayerTurn() {
+  turn = "player";
+  addPlayerListeners();
+}
 
-// // /*----- classes -----*/
-// // class button {
-// //     constructor() {};
-// // /* values 
-// // null:darkGrey
-// 1: green,
-// 2: red,
-// 3: yellow,
-// 4:blue */
-// // render the buttons to the selected value
-// }
+function addPlayerListeners() {
+  colorBtns.forEach((colorButton) => {
+    colorButton.addEventListener("click", handlePlayerMove);
+  });
+  startBtn.addEventListener("click", startGame);
+}
 
-// class SimonLightsGame {
-// //advance round if player 1 click(s) === simon click(s).
-// //if player 1 click(s) !== simon clicks, stop the game, announce combination count,
-// //render restart button & prompt player 1 to try again
+function removePlayerListeners() {
+  colorBtns.forEach((colorButton) => {
+    colorButton.removeEventListener("click", handlePlayerMove);
+  });
+  startBtn.removeEventListener("click", startGame);
+}
 
-//     constructor(boardEl, countEl) {};
-//     //initialize new game
-//     // reset combination count to 0
-//     // set the first turn to simon
-// }
+function handlePlayerMove(event) {
+  const selectedColor = event.target.id;
+  playerSequence.push(selectedColor);
+  event.target.classList.add("active");
+  setTimeout(() => {
+    event.target.classList.remove("active");
+  }, 500);
+  checkPlayerMove();
+}
 
-// /*----- functions -----*/
-// Initialize();
+function checkPlayerMove() {
+  for (let i = 0; i < playerSequence.length; i++) {
+    if (playerSequence[i] !== simonSequence[i]) {
+      endGame();
+      return;
+    };
+  };
+  if (playerSequence.length === simonSequence.length) {
+    setTimeout(() => {
+      roundCount++;
+      counterEl.textContent = roundCount;
+      playerSequence = [];
+      simonTurn();
+    }, 1000);
+  };
+};
 
-// function initialize() {
-//     board = [];
-//     turn = simon;
-//     render();
-// };
-
-// function render() {
-
-// };
-
-// // pseudo code 
-// //initialize a new game
-
-// //create a two new empty arrays from the original buttons array at the start
-// //of the game. 
-
-// //assign 1 new array to simon and 1 new array to Player 1
-
-// //Fill Simon's empty array with a random auto selected element from the original buttons array
-// // on simon's first turn. 
-
-// // function to alternate whose turn it is
-
-// // function to listen to Player 1's click and compare it to Simon's click
-// // if Player 1 click === simon's click, advance round.
+function endGame() {
+  gameOn = false;
+  messageEl.textContent = "Try again!";
+  colorBtns.forEach((colorButton) => {
+    colorButton.removeEventListener("click", handlePlayerMove);
+  });
+    messageTimeout = setTimeout(() => {
+        messageEl.textContent = "";
+      }, 2000);
+};

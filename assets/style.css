@@ -14,22 +14,18 @@ body {
   align-content: center;
 }
 
-h1 {
-  position: absolute;
-}
-
 .board-container {
   position: absolute;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  width: 60vw;
-  height: 60vh;
-  max-width: 425px;
-  max height: 425px;
-  min-width: 250px;
-  background-color: rgb(15, 15, 15);
-  border: solid 25px rgb(31, 31, 31);
+  width: 70vw;
+  height: 50vh;
+  max-width: 450px;
+  max height: 200px;
+  min-width: 300px;
+  background-color: hsl(0, 0%, 40%);
+  border: solid 25px hsl(0, 0%, 35%);
     box-shadow: 1px 20px 500px -30px #999;
   border-radius: 50%;
   margin-top: 60px;
@@ -44,43 +40,54 @@ h1 {
   gap: 13px;
 }
 
-#tl,
-#tr,
-#bl,
-#br {
+#green, #red,
+#yellow,
+#blue {
   border: solid 3px rgb(88, 88, 88);
   height: 100%;
   width: 100%;
   cursor: pointer;
 }
 
-#tl,
-#bl {
+#green, #yellow {
   grid-column: 1;
 }
 
-#tr,
-#br {
+#red,
+#blue {
   grid-column: 2;
 }
 
-#tl {
+.active {
+  background: radial-gradient(var(--active-color), var(--inactive-color));
+}
+
+
+#green {
   grid-row: 1;
+  --active-color: hsl(100deg, 90%, 75%);
+  --inactive-color: hsl(100deg, 70%, 40%);
   background-color: hsl(100, 70%, 40%);
   border-radius: 100% 5% 0% 5%;
 }
-#bl {
+#yellow {
   grid-row: 2 / 3;
+  --active-color: hsl(50deg, 90%, 75%);
+  --inactive-color: hsl(50deg, 70%, 40%);
   background-color: hsl(50, 70%, 40%);
   border-radius: 5% 0% 5% 100%;
 }
-#tr {
+#red {
   grid-row: 1;
+  --active-color: hsl(0deg, 90%, 75%);
+  --inactive-color: hsl(0deg, 70%, 40%);
   background-color: hsl(0, 70%, 40%);
   border-radius: 5% 100% 5% 0%;
 }
-#br {
+#blue {
   grid-row: 2 / 3;
+    --active-color: hsl(230deg, 90%, 75%);
+  --inactive-color: hsl(230deg, 70%, 40%);
   background-color: hsl(230, 70%, 40%);
   border-radius: 0% 5% 100% 5%;
 }
@@ -93,32 +100,40 @@ h1 {
   left: 25%;
   height: 50%;
   width: 50%;
-  background-color: rgb(65, 65, 65);
+  background-color: rgb(110, 110, 110);
   border-radius: 50%;
   border: solid 3px rgb(88, 88, 88);
   align-items: center;
 }
 
-#tl:active {
-  background: radial-gradient(hsl(100deg, 90%, 75%), hsl(100deg, 70%, 40%));
+h3 {
+    margin-top: .75em;
+    line-height: 75%;
 }
 
-#bl:active {
-  background: radial-gradient(hsl(50deg, 90%, 75%), hsl(50deg, 70%, 40%));
+#display {
+    position: relative;
+    display: flex;
+    margin-top: .80em;
+    background-color: #3e3e3e;
+    height: 2em;
+    padding: 7px 15px;
+    align-items: center;
+    text-align: center;
+    align-items: center;
+    text-align: center;
 }
 
-#tr:active {
-  background: radial-gradient(hsl(0deg, 90%, 75%), hsl(0deg, 70%, 40%));
-}
-
-#br:active {
-  background: radial-gradient(hsl(230deg, 90%, 75%), hsl(230deg, 70%, 40%));
+h2{
+    position: relative;
+    display: flex;
+    color: red;
 }
 
 .start {
   display: flex;
-  padding: 15px 25px;
-  font-size: 25px;
+  padding: 12px 25px;
+  font-size: 22px;
   text-align: center;
   cursor: pointer;
   outline: none;
@@ -127,7 +142,7 @@ h1 {
   border: none;
   border-radius: 0% 0% 50% 50%;
   box-shadow: 0 3px #999;
-  margin-top: 1em;
+  margin-top: 0.65em;
 }
 
 .start:hover {
@@ -138,11 +153,4 @@ h1 {
   background-color: #3e8e41;
   box-shadow: 0 6px #666;
   transform: translateY(4px);
-}
-
-#counter {
-    position: relative;
-    margin-top: 2em;
-    background-color: #999;
-    height: 2em;
 }
