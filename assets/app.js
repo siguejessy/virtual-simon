@@ -5,10 +5,16 @@ const colorBtns = document.querySelectorAll(".light-buttons > div");
 const startBtn = document.querySelector(".start");
 const counterEl = document.querySelector("#counter");
 const messageEl = document.querySelector("#message");
+const soundMap = {
+    "green": document.getElementById("green-sound"),
+    "red": document.getElementById("red-sound"),
+    "yellow": document.getElementById("yellow-sound"),
+    "blue": document.getElementById("blue-sound")
+  };
+  
 
 startBtn.addEventListener("click", startGame);
 function addPlayerListeners() {
-  startBtn.addEventListener("click", startGame);
   colorBtns.forEach((colorButton) => {
     colorButton.addEventListener("click", handlePlayerMove);
   });
@@ -20,6 +26,7 @@ function removePlayerListeners() {
   });
 }
 
+
 function startGame() {
     roundCount = 1;
     counterEl.textContent = roundCount;
@@ -28,6 +35,14 @@ function startGame() {
     playerSequence = [];
     simonTurn();
 
+}
+
+function playSound(color) {
+    const sound = soundMap[color];
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play();
+    }
 }
 
 function simonTurn() {
@@ -43,6 +58,17 @@ function updateSimonSequence() {
         );
         return simonSequence;
     }
+
+    function activateButton(color) {
+        const colorButton = Array.from(colorBtns).find(
+            (button) => button.id === color
+        );
+        colorButton.classList.add("active");
+        playSound(color); // Play sound
+        setTimeout(() => {
+            colorButton.classList.remove("active");
+        }, 600);
+    }
     
     function showSimonSequence() {
         setTimeout(() => {
@@ -50,16 +76,17 @@ function updateSimonSequence() {
                 setTimeout(() => {
                     const colorButton = Array.from(colorBtns).find(
                         (button) => button.id === color
-                        );
-                        colorButton.classList.add("active");
-                        setTimeout(() => {
-                            colorButton.classList.remove("active");
-                        }, 750);
-                    }, index * 1000);
-                });
-                setTimeout(setPlayerTurn, simonSequence.length * 1000);
-            }, 550);
-        }
+                    );
+                    colorButton.classList.add("active");
+                    playSound(color); // Play sound
+                    setTimeout(() => {
+                        colorButton.classList.remove("active");
+                    }, 750);
+                }, index * 1000);
+            });
+            setTimeout(setPlayerTurn, simonSequence.length * 1000);
+        }, 550);
+    }
         
         
         function setPlayerTurn() {
@@ -75,6 +102,7 @@ function updateSimonSequence() {
             const selectedColor = event.target.id;
             playerSequence.push(selectedColor);
             event.target.classList.add("active");
+            playSound(selectedColor); // Play sound
             setTimeout(() => {
                 event.target.classList.remove("active");
             }, 500);

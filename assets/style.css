@@ -104,6 +104,7 @@ body {
   border-radius: 50%;
   border: solid 3px rgb(88, 88, 88);
   align-items: center;
+
 }
 
 h3 {
@@ -125,10 +126,11 @@ h3 {
 }
 
 #counter{
-    position: relative;
-    display: flex;
     color: red;
 }
+
+#message {
+font-size: 15px;}
 
 .start {
   display: flex;
