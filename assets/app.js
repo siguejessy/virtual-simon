@@ -60,31 +60,24 @@ function updateSimonSequence() {
     }
 
     function activateButton(color) {
-        const colorButton = Array.from(colorBtns).find(
-            (button) => button.id === color
-        );
-        colorButton.classList.add("active");
-        playSound(color); // Play sound
-        setTimeout(() => {
-            colorButton.classList.remove("active");
-        }, 600);
-    }
-    
-    function showSimonSequence() {
+      const colorButton = Array.from(colorBtns).find(
+          (button) => button.id === color
+      );
+      colorButton.classList.add("active");
+      playSound(color); // Play sound
+      setTimeout(() => {
+          colorButton.classList.remove("active");
+      }, 700);
+  }
+      
+      function showSimonSequence() {
         setTimeout(() => {
             simonSequence.forEach((color, index) => {
                 setTimeout(() => {
-                    const colorButton = Array.from(colorBtns).find(
-                        (button) => button.id === color
-                    );
-                    colorButton.classList.add("active");
-                    playSound(color); // Play sound
-                    setTimeout(() => {
-                        colorButton.classList.remove("active");
-                    }, 750);
-                }, index * 1000);
+                    activateButton(color);
+                }, index * 800);
             });
-            setTimeout(setPlayerTurn, simonSequence.length * 1000);
+            setTimeout(setPlayerTurn, simonSequence.length * 800);
         }, 550);
     }
         
@@ -105,7 +98,7 @@ function updateSimonSequence() {
             playSound(selectedColor); // Play sound
             setTimeout(() => {
                 event.target.classList.remove("active");
-            }, 500);
+            }, 750);
             checkPlayerMove();
         }
         
@@ -136,5 +129,5 @@ function endGame() {
   });
   messageTimeout = setTimeout(() => {
     messageEl.textContent = "";
-  }, 2000);
+  }, 2500);
 }
