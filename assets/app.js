@@ -6,12 +6,12 @@ const startBtn = document.querySelector(".start");
 const counterEl = document.querySelector("#counter");
 const messageEl = document.querySelector("#message");
 const soundMap = {
-    "green": document.getElementById("green-sound"),
-    "red": document.getElementById("red-sound"),
-    "yellow": document.getElementById("yellow-sound"),
-    "blue": document.getElementById("blue-sound")
-  };
-  
+  green: document.getElementById("green-sound"),
+  red: document.getElementById("red-sound"),
+  yellow: document.getElementById("yellow-sound"),
+  blue: document.getElementById("blue-sound"),
+};
+
 startBtn.addEventListener("click", startGame);
 function addPlayerListeners() {
   colorBtns.forEach((colorButton) => {
@@ -26,82 +26,79 @@ function removePlayerListeners() {
 }
 
 function startGame() {
-    roundCount = 1;
-    counterEl.textContent = roundCount;
-    messageEl.textContent = "";
-    simonSequence = [];
-    playerSequence = [];
-    simonTurn();
-
+  roundCount = 1;
+  counterEl.textContent = roundCount;
+  messageEl.textContent = "";
+  simonSequence = [];
+  playerSequence = [];
+  simonTurn();
 }
 
 function playSound(color) {
-    const sound = soundMap[color];
-    if (sound) {
-        sound.currentTime = 0;
-        sound.play();
-    }
+  const sound = soundMap[color];
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play();
+  }
 }
 
 function simonTurn() {
-    simonSays = true;
-    removePlayerListeners;
-    simonSequence = updateSimonSequence(roundCount);
-    showSimonSequence(setPlayerTurn);
+  simonSays = true;
+  removePlayerListeners;
+  simonSequence = updateSimonSequence(roundCount);
+  showSimonSequence(setPlayerTurn);
 }
 
 function updateSimonSequence() {
-    simonSequence.push(
-        colorBtns[Math.floor(Math.random() * colorBtns.length)].id
-        );
-        return simonSequence;
-    }
+  simonSequence.push(
+    colorBtns[Math.floor(Math.random() * colorBtns.length)].id
+  );
+  return simonSequence;
+}
 
-    function activateButton(color) {
-      const colorButton = Array.from(colorBtns).find(
-          (button) => button.id === color
-      );
-      colorButton.classList.add("active");
-      playSound(color); // Play sound
+function activateButton(color) {
+  const colorButton = Array.from(colorBtns).find(
+    (button) => button.id === color
+  );
+  colorButton.classList.add("active");
+  playSound(color);
+  setTimeout(() => {
+    colorButton.classList.remove("active");
+  }, 700);
+}
+
+function showSimonSequence() {
+  setTimeout(() => {
+    simonSequence.forEach((color, index) => {
       setTimeout(() => {
-          colorButton.classList.remove("active");
-      }, 700);
+        activateButton(color);
+      }, index * 800);
+    });
+    setTimeout(setPlayerTurn, simonSequence.length * 800);
+  }, 550);
+}
+
+function setPlayerTurn() {
+  simonSays = false;
+  addPlayerListeners();
+}
+
+function handlePlayerMove(event) {
+  if (simonSays) {
+    return;
   }
-      
-      function showSimonSequence() {
-        setTimeout(() => {
-            simonSequence.forEach((color, index) => {
-                setTimeout(() => {
-                    activateButton(color);
-                }, index * 800);
-            });
-            setTimeout(setPlayerTurn, simonSequence.length * 800);
-        }, 550);
-    }
-        
-        
-        function setPlayerTurn() {
-            simonSays = false;
-            addPlayerListeners();
-        }
-        
-        
-        function handlePlayerMove(event) {
-            if (simonSays) {
-                return;
-            }
-            const selectedColor = event.target.id;
-            playerSequence.push(selectedColor);
-            event.target.classList.add("active");
-            playSound(selectedColor); // Play sound
-            setTimeout(() => {
-                event.target.classList.remove("active");
-            }, 750);
-            checkPlayerMove();
-        }
-        
-        function checkPlayerMove() {
-            for (let i = 0; i < playerSequence.length; i++) {
+  const selectedColor = event.target.id;
+  playerSequence.push(selectedColor);
+  event.target.classList.add("active");
+  playSound(selectedColor);
+  setTimeout(() => {
+    event.target.classList.remove("active");
+  }, 750);
+  checkPlayerMove();
+}
+
+function checkPlayerMove() {
+  for (let i = 0; i < playerSequence.length; i++) {
     if (playerSequence[i] !== simonSequence[i]) {
       removePlayerListeners();
       endGame();
