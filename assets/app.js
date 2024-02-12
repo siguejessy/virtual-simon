@@ -12,7 +12,6 @@ const soundMap = {
     "blue": document.getElementById("blue-sound")
   };
   
-
 startBtn.addEventListener("click", startGame);
 function addPlayerListeners() {
   colorBtns.forEach((colorButton) => {
@@ -25,7 +24,6 @@ function removePlayerListeners() {
     colorButton.removeEventListener("click", handlePlayerMove);
   });
 }
-
 
 function startGame() {
     roundCount = 1;
