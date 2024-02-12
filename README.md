@@ -40,6 +40,9 @@ Theme Selection - Mix & match between button color themes & sound themes.<br>
 Multi-player mode<br>
 </br></br>
 
+![image](/assets/images/Simon%20SS1.png)
+![image](/assets/images/Simon%20SS2.png)
+
 ```
 /*---- pseudo code ----*/
 
