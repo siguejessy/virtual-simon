@@ -8,7 +8,7 @@ body {
   height: 100vh;
   background-color: black;
   color: azure;
-  padding: 50px;
+  padding: 1vw;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -19,12 +19,11 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  width: 70vw;
-  height: 60vh;
-  max-width: 400px;
-  max-height: 400px;
-  min-width: 200px;
-  min-height: 200px;
+  width: 80%;
+  min-height: 20em;
+  min-width: 20em;
+  max-width: 25em;
+  max-height: 30em;
   background-color: hsl(0, 0%, 50%);
   border: solid 25px hsl(0, 0%, 35%);
   box-shadow: 5px 10px 30px -10px #151515;
