@@ -1,6 +1,6 @@
 # Virtual Simon
 
-## [Click to launch Game](https://siguejessy.github.io/sei-project-1/)<br>
+## [Click to launch Game](https://siguejessy.github.io/virtual-simon/)<br>
 
 [🟢 🔴<br>
 🟡 🔵<br>](https://siguejessy.github.io/virtual-simon/)
