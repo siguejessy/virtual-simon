@@ -3,7 +3,7 @@
 ## [Click to launch Game](https://siguejessy.github.io/sei-project-1/)<br>
 
 [🟢 🔴<br>
-🟡 🔵<br>](https://siguejessy.github.io/sei-project-1/)
+🟡 🔵<br>](https://siguejessy.github.io/virtual-simon/)
 
 ### Simon - An interactive memorization game.
 
