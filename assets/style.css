@@ -34,7 +34,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  width: 56%;
+  width: 86%;
   height: auto;
   max-width: 660px;
   max-height: 660px;
@@ -142,8 +142,13 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
-  font-size: 3.8vw;
-  margin-top: 18%;
+  justify-content: center;
+  justify-items: center;
+  place-content: center;
+  font-size: 5vw;
+  margin-top: 14%;
+  margin: 0;
+  width: 100%;
 }
 
 #message {
